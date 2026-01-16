@@ -1,0 +1,48 @@
+:root {
+  --primary: #2563eb;
+  --secondary: #64748b;
+  --danger: #dc2626;
+  --warning: #f59e0b;
+  --info: #06b6d4;
+  --success: #00ae4c;
+  --light: #f9fafb;
+  --dark: #181a1b;
+  --radius: 8px;
+}
+
+/* Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Typography */
+@font-face {
+  font-family: Aeonik;
+  src: url(/src/assets/fonts/Aeonik/fonnts.com-Aeonik-Regular.ttf);
+}
+@font-face {
+  font-family: Aeonik-bold;
+  src: url(/src/assets/fonts/Aeonik/fonnts.com-Aeonik-Bold.ttf);
+}
+
+/* Global Styles */
+html,
+body {
+  width: 100%;
+  height: 100%;
+  background-color: var(--dark);
+  color: var(--light);
+  font-family: Aeonik, sans-serif;
+}
+
+.main {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+}
+
+
