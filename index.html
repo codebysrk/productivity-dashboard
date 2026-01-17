@@ -1,16 +1,99 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Productivity Dashboard</title>
+
+    <!-- Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.8.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="src/css/style.css" />
   </head>
+
   <body>
-    <div class="main">
-     <nav></nav>
-     <section></section>
-    </div>
-    <script src="src/js/script.js"></script>
+    <main>
+      <header>
+        <div class="logo">
+          <i class="ri-dashboard-3-fill"></i>
+          <p>Productivity Dashboard</p>
+        </div>
+
+        <nav>
+          <div
+            class="btn-icon"
+            id="themeToggle"
+            title="Toggle Theme (Requires JS)"
+          >
+            <i class="ri-moon-line" id="themeIcon"></i>
+          </div>
+
+          <div class="profile" title="View Profile">
+            <img
+              src="https://ui-avatars.com/api/?name=Alex+Doe&background=0081a9&color=fff&bold=true"
+              alt="User profile"
+            />
+          </div>
+        </nav>
+      </header>
+
+      <div class="container">
+        <!-- Hero Section -->
+        <div class="top-header">
+          <h1 id="greeting">Good Morning, Alex</h1>
+          <p>
+            <i class="ri-calendar-line"></i>
+            <span id="currentDate">Friday, January 24</span>
+          </p>
+        </div>
+
+        <div class="bottom">
+          <!-- Todo Box -->
+          <div class="box todo">
+            <h3><i class="ri-checkbox-circle-line"></i> Tasks</h3>
+          </div>
+
+          <!-- Pomodoro Box -->
+          <div class="box pomodoro-timer">
+            <h3><i class="ri-timer-2-line"></i> Focus</h3>
+          </div>
+
+          <!-- Daily Planner -->
+          <div class="box daily-planner">
+            <h3><i class="ri-calendar-event-line"></i> Schedule</h3>
+          </div>
+
+          <!-- Goals -->
+          <div class="box goals">
+            <h3><i class="ri-trophy-line"></i> Monthly Goals</h3>
+          </div>
+
+          <!-- Motivation -->
+          <div class="box motivation">
+            <h3><i class="ri-lightbulb-flash-line"></i> Insight</h3>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script>
+      const today = new Date();
+      const expiry = new Date("2026-01-17");
+
+      if (today > expiry) {
+        console.log("Expired");
+      } else {
+        console.log("Still valid");
+      }
+    </script>
   </body>
 </html>
