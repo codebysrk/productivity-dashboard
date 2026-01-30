@@ -67,6 +67,7 @@ body {
 .top-bar__logo-text {
   font-weight: 800;
   background: var(--primary-gradient);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -342,4 +343,303 @@ body {
   .side-nav {
     display: block;
   }
+}
+
+/* =========================================
+   New Section Styles
+   ========================================= */
+
+/* Common Elements */
+.pane-header {
+  margin-bottom: 2rem;
+}
+.pane-title {
+  font-size: 2rem;
+  font-weight: 800;
+  background: var(--primary-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+.pane-subtitle {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+.input-group {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  height: 52px;
+}
+.input-group input {
+  height: 100%;
+  flex: 1;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(5px);
+  font-family: inherit;
+  font-size: 1rem;
+  outline: none;
+  transition: 0.3s;
+}
+.input-group input:focus {
+  background: #fff;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+.btn-primary {
+  background: var(--primary-gradient);
+  color: white;
+  border: none;
+  padding: 0 2rem;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: 0.3s;
+  height: 100%;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+}
+
+/* Task Manager */
+.task-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.task-item {
+  background: var(--glass-white);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+  transition: 0.3s;
+  animation: slideIn 0.3s ease;
+}
+.task-item:hover {
+  transform: translateX(4px);
+}
+.task-check {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid #cbd5e1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+}
+.task-item.completed .task-check {
+  background: #22c55e;
+  border-color: #22c55e;
+  color: white;
+}
+.task-text {
+  flex: 1;
+  font-weight: 500;
+}
+.task-item.completed .task-text {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+.btn-delete {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+}
+.btn-delete:hover {
+  background: #ef4444;
+  color: white;
+}
+
+/* Daily Planner */
+.planner-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  background: var(--glass-white);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  padding: 1.5rem;
+  border-radius: 16px;
+}
+.time-slot {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.slot-time {
+  font-weight: 700;
+  color: var(--text-muted);
+  width: 80px;
+  text-align: right;
+  font-size: 0.9rem;
+}
+.slot-input {
+  flex: 1;
+  padding: 0.8rem;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--text-primary);
+  transition: 0.3s;
+  border-radius: 4px;
+}
+.slot-input:focus {
+  outline: none;
+  background: white;
+  border-bottom-color: #6366f1;
+  padding-left: 1rem;
+}
+
+/* Pomodoro Timer */
+.timer-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  padding-bottom: 4rem;
+}
+.timer-display {
+  text-align: center;
+}
+#timer-time {
+  font-size: 8rem;
+  font-weight: 800;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  background: linear-gradient(135deg, #4f46e5 0%, #ec4899 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#timer-status {
+  font-size: 1.5rem;
+  color: var(--text-muted);
+  margin-top: 1rem;
+  font-weight: 500;
+}
+.timer-controls {
+  display: flex;
+  gap: 1.5rem;
+}
+.btn-control {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: none;
+  background: white;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: 0.3s;
+}
+.btn-control:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 30px rgba(99, 102, 241, 0.2);
+  color: #6366f1;
+}
+#btn-start-timer {
+  background: #6366f1;
+  color: white;
+}
+#btn-start-timer:hover {
+  background: #4f46e5;
+  color: white;
+}
+.timer-modes {
+  background: var(--glass-white);
+  backdrop-filter: blur(5px);
+  padding: 0.5rem;
+  border-radius: 16px;
+  display: flex;
+  gap: 0.5rem;
+}
+.mode-btn {
+  border: none;
+  background: transparent;
+  padding: 0.8rem 1.5rem;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: 0.3s;
+}
+.mode-btn.active {
+  background: white;
+  color: #6366f1;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Goals */
+.goals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+.goal-card {
+  background: var(--glass-white);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  padding: 2rem;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.goal-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 100%;
+  background: var(--primary-gradient);
+}
+.goal-content {
+  flex: 1;
+}
+.goal-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.goal-status {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
