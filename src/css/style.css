@@ -1,292 +1,280 @@
 :root {
-  --primary: #0081a9;
-  --secondary: #b8d8e0;
-  --surface: #1e293b;
-  --surface-light: rgba(255, 255, 255, 0.05);
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
-  --accent: #ff7235;
-  --success: #10b981;
-  --danger: #ef4444;
-
-  --bg-gradient: radial-gradient(circle at top right, #1e293b 0%, #0f172a 100%);
-  --card-bg: rgba(30, 41, 59, 0.7);
-  --card-border: 1px solid rgba(255, 255, 255, 0.1);
-  --header-bg: rgba(30, 41, 59, 0.8);
-  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
-}
-
-[data-theme="light"] {
-  --bg-gradient: radial-gradient(circle at top right, #f1f5f9 0%, #e2e8f0 100%);
-  --card-bg: rgba(255, 255, 255, 0.8);
-  --card-border: 1px solid rgba(255, 255, 255, 0.6);
-  --header-bg: rgba(255, 255, 255, 0.8);
-  --surface: #ffffff;
-  --text-main: #0f172a;
+  /* Design Tokens */
+  --bg-app: #f4f7fa;
+  --text-main: #1e293b;
   --text-muted: #64748b;
-  --primary: #0ea5e9;
+
+  /* Glassmorphism Specs */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.5);
+  --glass-shadow: 0 10px 30px rgba(31, 38, 135, 0.06);
+
+  /* Accent Colors */
+  --primary-grad: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
 }
 
+/* 1. Global Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  -webkit-font-smoothing: antialiased;
 }
 
 body {
-  background: url(https://imgs.search.brave.com/EzOS8c6fHPiSR0zt-Ul3m0kReZo-8TBcnk_hq8cumlo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJhY2Nlc3Mu/Y29tL2Z1bGwvMjM5/NDM1NC5qcGc);
-  background-size: cover;
-  background-repeat: no-repeat;
-  color: var(--text-main);
   font-family: "DM Sans", sans-serif;
+  background-color: var(--bg-app);
+  background-image:
+    radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.1) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(45, 212, 191, 0.1) 0px, transparent 50%);
+  color: var(--text-main);
   min-height: 100vh;
-  transition: background 0.3s ease, color 0.3s ease;
-  overflow-x: hidden;
 }
 
-main {
-  min-height: 100vh;
+/* 2. Layout Components */
+.app-container {
   display: flex;
   flex-direction: column;
-  padding-bottom: 2rem;
+  min-height: 100vh;
 }
 
-header {
+.main-layout {
+  display: flex;
+  flex: 1;
+}
+
+/* 3. Navbar Styling */
+.navbar {
   position: sticky;
   top: 0;
+  z-index: 100;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.75rem 1.5rem;
-  min-width: 1200px;
-  background-color: var(--header-bg);
-  border: var(--card-border);
-  box-shadow: var(--shadow-sm);
+  padding: 0.8rem 1.5rem;
+  background: var(--glass-bg);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.navbar__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 1.1rem;
+  background: var(--primary-grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.navbar__icon {
+  font-size: 1.6rem;
+  -webkit-text-fill-color: #6366f1;
+}
+
+.navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* 4. Sidebar Styling (Desktop Only) */
+.side-nav {
+  width: 260px;
+  padding: 2rem 1.2rem;
+  display: none; 
+}
+
+.side-nav__link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  color: var(--text-muted);
+  text-decoration: none;
+  border-radius: 10px;
+  margin-bottom: 8px;
+  font-weight: 600;
   transition: all 0.3s ease;
 }
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+
+.side-nav__link--active {
+  background: #ffffff;
+  color: #6366f1;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.1);
 }
 
-.logo i {
-  font-size: 1.5rem;
-  color: var(--accent);
+.side-nav__link:hover:not(.side-nav__link--active) {
+  background: rgba(255, 255, 255, 0.5);
+  transform: translateX(5px);
 }
 
-.logo p {
-  font-weight: 700;
-  font-size: 1.1rem;
-  letter-spacing: -0.02em;
-  text-transform: uppercase;
-}
-
-header nav {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.btn-icon {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 12px;
-  cursor: pointer;
-  background: var(--surface-light);
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  color: var(--text-main);
-}
-
-.btn-icon:hover {
-  background: var(--primary);
-  color: white;
-  transform: translateY(-2px);
-}
-
-header nav .profile {
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  overflow: hidden;
-  border: 2px solid var(--surface-light);
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-
-header nav .profile:hover {
-  transform: scale(1.05);
-  border-color: var(--accent);
-}
-
-header nav .profile img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.container {
+/* 5. Dashboard Grid - Locked Multi-Column */
+.dashboard-grid {
   flex: 1;
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns for mobile/tablet */
+  gap: 0.75rem;
+  padding: 1rem;
 }
 
-.top-header {
-  min-height: 200px;
-  background: linear-gradient(120deg, var(--primary), #6366f1);
-  border-radius: 24px;
-  padding: 3rem 2.5rem;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+/* 6. Base Card Component */
+.widget-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  padding: 1.25rem;
+  grid-column: span 1; /* Individual cards take half width */
   position: relative;
   overflow: hidden;
-  box-shadow: var(--shadow-lg);
-}
-
-.top-header::before {
-  content: "";
-  position: absolute;
-  top: -50px;
-  right: -50px;
-  width: 200px;
-  height: 200px;
-  background: rgb(255, 0, 0);
-  border-radius: 50%;
-}
-.top-header::after {
-  content: "";
-  position: absolute;
-  bottom: -30px;
-  right: 80px;
-  width: 100px;
-  height: 100px;
-  background: rgba(0, 254, 195, 0.493);
-  border-radius: 50%;
-}
-.top-header h1 {
-  font-size: 2.75rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  letter-spacing: -0.03em;
-  z-index: 1;
-}
-
-.top-header p {
-  font-size: 1.1rem;
-  opacity: 0.9;
-  font-weight: 500;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.bottom {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 1.5rem;
-  width: 100%;
-}
-
-.box {
-  background-color: var(--card-bg);
-  border: var(--card-border);
-  backdrop-filter: blur(10px);
-  border-radius: 24px;
-  padding: 1.75rem;
+  box-shadow: var(--glass-shadow);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
-    box-shadow 0.3s ease;
-  box-shadow: var(--shadow-sm);
 }
 
-.box:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-lg);
-  border-color: rgba(255, 255, 255, 0.2);
+.widget-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 20px 40px rgba(31, 38, 135, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.8);
 }
 
-.todo {
-  grid-column: span 12;
-}
-.pomodoro-timer {
-  grid-column: span 12;
-}
-.daily-planner {
-  grid-column: span 12;
-}
-.goals {
-  grid-column: span 12;
-}
-.motivation {
-  grid-column: span 12;
+/* Force specific cards to span full width on all views */
+.widget-card--weather,
+.widget-card--analytics {
+  grid-column: span 2;
 }
 
+/* 7. Weather Card (New Delhi) */
+.widget-card--weather {
+ background-image: url("https://images.unsplash.com/photo-1576519465852-4d119fcccf33?q=80&w=2103&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+  background-size: cover;
+  background-position: center;
+  border: none;
+  color: white;
+  min-height: 200px;
+  justify-content: space-between;
+}
+
+.weather-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.6) 0%, transparent 70%);
+  z-index: 1;
+}
+
+.weather-display {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 100%;
+}
+
+.weather-display__time {
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.weather-display__temp-value {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.weather-display__location {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px 12px;
+  border-radius: 50px;
+  backdrop-filter: blur(10px);
+  font-weight: 700;
+  font-size: 0.8rem;
+  margin-top: 5px;
+}
+
+/* 8. Hero Cards */
+.widget-card--hero {
+  justify-content: flex-end;
+  background-size: cover;
+  background-position: center;
+  border: none;
+  color: white;
+  min-height: 140px;
+}
+
+.widget-card--hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 30%, rgba(0, 0, 0, 0.7) 100%);
+}
+
+.hero-label {
+  position: relative;
+  z-index: 2;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.widget-card--tasks { background-image: url("https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=500"); }
+.widget-card--plans { background-image: url("https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=500"); }
+.widget-card--timer { background-image: url("https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=500"); }
+.widget-card--goals { background-image: url("https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=500"); }
+
+/* 9. Analytics/Motivation */
+.widget-card--analytics { background: #ffffff; }
+.widget-card__title { font-size: 0.75rem; font-weight: 800; letter-spacing: 1px; color: var(--text-muted); text-transform: uppercase; }
+.centered-content { flex: 1; display: flex; align-items: center; justify-content: center; text-align: center; padding: 1.5rem; }
+.quote-text { font-size: 1.1rem; font-weight: 500; font-style: italic; color: #475569; line-height: 1.4; }
+
+/* 10. UI Elements */
+.button-icon {
+  width: 40px; height: 40px; background: white; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; border: 1px solid var(--glass-border);
+  transition: 0.2s;
+}
+
+.user-profile { width: 40px; height: 40px; border-radius: 10px; overflow: hidden; border: 2px solid white; }
+.user-profile__image { width: 100%; height: 100%; object-fit: cover; }
+
+/* 11. Responsive Logic (Tablet & Desktop) */
 @media (min-width: 768px) {
-  .todo {
-    grid-column: span 8;
+  .dashboard-grid {
+    grid-template-columns: repeat(4, 1fr); /* Expands to 4 columns */
+    gap: 1rem;
   }
-  .pomodoro-timer {
+
+  /* Weather & Analytics span all 4 columns */
+  .widget-card--weather,
+  .widget-card--analytics {
     grid-column: span 4;
   }
-  .daily-planner {
-    grid-column: span 4;
+
+  /* Weather card gets more height on bigger screens */
+  .widget-card--weather {
+    min-height: 240px;
   }
-  .goals {
-    grid-column: span 4;
-  }
-  .motivation {
-    grid-column: span 4;
+
+  .weather-display__time { font-size: 2.5rem; }
+  .weather-display__temp-value { font-size: 4.5rem; }
+
+  /* Hero cards stay in 1 column each, creating a 4-card row */
+  .widget-card--hero {
+    grid-column: span 1;
+    min-height: 180px;
   }
 }
 
 @media (min-width: 1024px) {
-  .todo {
-    grid-column: span 4;
-    grid-row: span 2;
-    }
-    .daily-planner {
-      grid-column: span 4;
-      grid-row: span 2;
-      }
-      .pomodoro-timer {
-        grid-column: span 4;
-        }
-        .goals {
-          grid-column: span 4;
-          }
-          .motivation {
-            grid-column: span 12;
-            }
-            }
-            /*  
-
-.box h3 {
-  font-size: 1.1rem;
-  margin-bottom: 1.25rem;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-weight: 600;
-  font-size: 0.85rem;
+  .side-nav { display: block; }
 }
-
-.box h3 i {
-  font-size: 1.2rem;
-  color: var(--accent);
-} */
