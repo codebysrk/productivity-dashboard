@@ -13,8 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Transition Logic
     dashboardHub.classList.remove("js-view-active");
-    detailPanes.forEach(p => p.classList.remove("is-active"));
-    
+    detailPanes.forEach((p) => p.classList.remove("is-active"));
+
     target.classList.add("is-active");
     updateNavActiveState(viewId);
     window.scrollTo(0, 0);
@@ -22,40 +22,52 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Navigation: Reset to Dashboard
   function resetToHome() {
-    detailPanes.forEach(p => p.classList.remove("is-active"));
+    detailPanes.forEach((p) => p.classList.remove("is-active"));
     dashboardHub.classList.add("js-view-active");
-    updateNavActiveState('home');
+    updateNavActiveState("home");
   }
 
   function updateNavActiveState(id) {
-    navLinks.forEach(link => {
-      const isActive = (link.dataset.view === id) || (id === 'home' && link.id === 'nav-home');
+    navLinks.forEach((link) => {
+      const isActive =
+        link.dataset.view === id || (id === "home" && link.id === "nav-home");
       link.classList.toggle("side-nav__link--active", isActive);
     });
   }
 
   // Click Handlers: Grid Cards
-  bentoCards.forEach(card => {
+  bentoCards.forEach((card) => {
     card.addEventListener("click", () => showView(card.dataset.view));
   });
 
   // Click Handlers: Sidebar Links
-  navLinks.forEach(link => {
+  navLinks.forEach((link) => {
     link.addEventListener("click", (e) => {
       e.preventDefault();
-      if (link.id === 'nav-home') resetToHome();
+      if (link.id === "nav-home") resetToHome();
       else showView(link.dataset.view);
     });
   });
 
   // Click Handlers: Back Buttons
-  backButtons.forEach(btn => btn.addEventListener("click", resetToHome));
+  backButtons.forEach((btn) => btn.addEventListener("click", resetToHome));
+
+  // Click Handler: Brand Logo
+  document
+    .querySelector(".top-bar__brand")
+    .addEventListener("click", resetToHome);
 
   // Live Clock
   function updateTime() {
     const now = new Date();
-    document.querySelector(".js-time").textContent = now.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: true });
-    document.querySelector(".js-date").textContent = now.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+    document.querySelector(".js-time").textContent = now.toLocaleTimeString(
+      "en-US",
+      { hour: "2-digit", minute: "2-digit", hour12: true },
+    );
+    document.querySelector(".js-date").textContent = now.toLocaleDateString(
+      "en-GB",
+      { day: "numeric", month: "short", year: "numeric" },
+    );
   }
   setInterval(updateTime, 1000);
   updateTime();
