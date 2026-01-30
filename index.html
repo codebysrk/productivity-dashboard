@@ -1,108 +1,116 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Productivity Dashboard</title>
-
+    <title>Productivity OS | Pro</title>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.8.0/fonts/remixicon.css" rel="stylesheet" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="src/css/style.css" />
   </head>
-
   <body>
-    <main class="app-container">
-      <header class="navbar">
-        <div class="navbar__brand">
-          <i class="ri-dashboard-3-fill navbar__icon"></i>
-          <p>Productivity Dashboard</p>
+    <main class="app-shell">
+      <header class="top-bar">
+        <div class="top-bar__brand">
+          <i class="ri-dashboard-3-fill top-bar__logo-icon"></i>
+          <span class="top-bar__logo-text">Productivity OS</span>
         </div>
-
-        <nav class="navbar__actions">
-          <div class="button-icon" title="Toggle Theme">
-            <i class="ri-sun-line"></i>
-          </div>
-          <div class="button-icon" title="Notifications">
-            <i class="ri-notification-3-line"></i>
-          </div>
+        <nav class="top-bar__actions">
+          <button class="action-btn"><i class="ri-sun-line"></i></button>
+          <button class="action-btn"><i class="ri-notification-3-line"></i></button>
           <div class="user-profile">
-            <img class="user-profile__image" src="https://ui-avatars.com/api/?name=Alex+Doe&background=6366f1&color=fff" alt="User profile" />
+            <img src="https://ui-avatars.com/api/?name=Alex+Doe&background=6366f1&color=fff" alt="User" class="user-profile__img" />
           </div>
         </nav>
       </header>
 
-      <div class="main-layout">
+      <div class="layout-body">
         <aside class="side-nav">
-          <a href="#" class="side-nav__link side-nav__link--active"><i class="ri-home-4-line"></i> Dashboard</a>
-          <a href="#" class="side-nav__link"><i class="ri-calendar-check-line"></i> Calendar</a>
-          <a href="#" class="side-nav__link"><i class="ri-list-check-2"></i> Tasks</a>
-          <a href="#" class="side-nav__link"><i class="ri-folder-3-line"></i> Projects</a>
-          <a href="#" class="side-nav__link"><i class="ri-bar-chart-line"></i> Analytics</a>
+          <a href="#" class="side-nav__link side-nav__link--active" id="nav-home">
+            <i class="ri-home-4-line"></i> <span>Dashboard</span>
+          </a>
+          <hr class="side-nav__divider" />
+          <a href="#" class="side-nav__link" data-view="tasks">
+            <i class="ri-list-check-2"></i> <span>My Tasks</span>
+          </a>
+          <a href="#" class="side-nav__link" data-view="plans">
+            <i class="ri-calendar-event-line"></i> <span>Daily Plans</span>
+          </a>
+          <a href="#" class="side-nav__link" data-view="timer">
+            <i class="ri-history-line"></i> <span>Pomodoro</span>
+          </a>
+          <a href="#" class="side-nav__link" data-view="goals">
+            <i class="ri-medal-line"></i> <span>Goals</span>
+          </a>
         </aside>
 
-        <section class="dashboard-grid">
+        <div class="main-content">
           
-          <article class="widget-card widget-card--weather">
-            <div class="weather-overlay"></div>
-            <div class="weather-display">
-              <div class="weather-display__info">
-                <p class="weather-display__date js-date">Loading date...</p>
-                <h2 class="weather-display__time js-time">00:00</h2>
-                <div class="weather-display__location">
-                  <i class="ri-map-pin-2-fill"></i> 
-                  <span>New Delhi, India</span>
+          <section class="view-hub js-view-active">
+            <div class="bento-grid">
+              
+              <article class="bento-card bento-card--weather" data-view="weather">
+                <div class="card-overlay"></div>
+                <div class="weather-meta">
+                  <div class="weather-meta__left">
+                    <p class="js-date">Loading...</p>
+                    <h2 class="js-time">00:00</h2>
+                    <span class="pill-badge"><i class="ri-map-pin-2-fill"></i> New Delhi</span>
+                  </div>
+                  <div class="weather-meta__right">
+                    <h2 class="temp-val">22°C</h2>
+                    <p class="temp-desc">Sunny</p>
+                  </div>
                 </div>
+              </article>
+
+              <div class="bento-card bento-card--action bento-card--tasks" data-view="tasks">
+                <h3 class="card-label">My Tasks</h3>
               </div>
-              <div class="weather-display__temp">
-                <h2 class="weather-display__temp-value">22°C</h2>
-                <h3 class="weather-display__condition">Mostly Sunny</h3>
+              <div class="bento-card bento-card--action bento-card--plans" data-view="plans">
+                <h3 class="card-label">Daily Plans</h3>
               </div>
-            </div>
-          </article>
+              <div class="bento-card bento-card--action bento-card--timer" data-view="timer">
+                <h3 class="card-label">Pomodoro</h3>
+              </div>
+              <div class="bento-card bento-card--action bento-card--goals" data-view="goals">
+                <h3 class="card-label">Goals</h3>
+              </div>
 
-          <div class="widget-card widget-card--hero widget-card--tasks">
-            <h3 class="hero-label">My Tasks</h3>
-          </div>
-          <div class="widget-card widget-card--hero widget-card--plans">
-            <h3 class="hero-label">Daily Plans</h3>
-          </div>
-          <div class="widget-card widget-card--hero widget-card--timer">
-            <h3 class="hero-label">Pomodoro</h3>
-          </div>
-          <div class="widget-card widget-card--hero widget-card--goals">
-            <h3 class="hero-label">Goals</h3>
-          </div>
-
-          <article class="widget-card widget-card--analytics">
-            <div class="widget-card__header">
-              <span class="widget-card__title">Daily Motivation</span>
-              <i class="ri-double-quotes-r"></i>
+              <article class="bento-card bento-card--footer">
+                <div class="quote-header">
+                  <span class="label-text">Inspiration</span>
+                  <i class="ri-double-quotes-r"></i>
+                </div>
+                <p class="quote-text">"The only way to do great work is to love what you do."</p>
+              </article>
+              
             </div>
-            <div class="centered-content">
-              <p class="quote-text">"Focus on being productive instead of busy."</p>
-            </div>
-          </article>
+          </section>
 
-        </section>
+          <section class="detail-pane" id="pane-tasks">
+            <button class="btn-back js-back"><i class="ri-arrow-left-line"></i> Dashboard</button>
+            <h1 class="pane-title">Task Management</h1>
+          </section>
+
+          <section class="detail-pane" id="pane-plans">
+            <button class="btn-back js-back"><i class="ri-arrow-left-line"></i> Dashboard</button>
+            <h1 class="pane-title">Daily Planner</h1>
+          </section>
+
+          <section class="detail-pane" id="pane-timer">
+            <button class="btn-back js-back"><i class="ri-arrow-left-line"></i> Dashboard</button>
+            <h1 class="pane-title">Pomodoro Timer</h1>
+          </section>
+
+          <section class="detail-pane" id="pane-goals">
+            <button class="btn-back js-back"><i class="ri-arrow-left-line"></i> Dashboard</button>
+            <h1 class="pane-title">2026 Goals</h1>
+          </section>
+
+        </div>
       </div>
     </main>
-
-    <script>
-      function updateDateTime() {
-        const now = new Date();
-        const dateOptions = { day: "numeric", month: "short", year: "numeric" };
-        document.querySelector(".js-date").innerText = now.toLocaleDateString("en-GB", dateOptions);
-
-        const timeStr = now.toLocaleTimeString("en-US", {
-          hour: "2-digit", minute: "2-digit", hour12: true
-        });
-        document.querySelector(".js-time").innerText = timeStr;
-      }
-
-      setInterval(updateDateTime, 1000);
-      updateDateTime();
-    </script>
+    <script src="src/js/script.js"></script>
   </body>
 </html>

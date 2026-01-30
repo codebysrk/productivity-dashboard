@@ -1,280 +1,102 @@
 :root {
-  /* Design Tokens */
-  --bg-app: #f4f7fa;
-  --text-main: #1e293b;
+  --bg-main: #f4f7fa;
+  --text-primary: #1e293b;
   --text-muted: #64748b;
-
-  /* Glassmorphism Specs */
-  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-white: rgba(255, 255, 255, 0.7);
   --glass-border: rgba(255, 255, 255, 0.5);
-  --glass-shadow: 0 10px 30px rgba(31, 38, 135, 0.06);
-
-  /* Accent Colors */
-  --primary-grad: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+  --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+  --shadow: 0 10px 25px rgba(30, 41, 59, 0.05);
 }
 
-/* 1. Global Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
   font-family: "DM Sans", sans-serif;
-  background-color: var(--bg-app);
-  background-image:
-    radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.1) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(45, 212, 191, 0.1) 0px, transparent 50%);
-  color: var(--text-main);
-  min-height: 100vh;
+  background-color: var(--bg-main);
+  background-image: radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.08) 0px, transparent 50%),
+                    radial-gradient(at 100% 100%, rgba(45, 212, 191, 0.08) 0px, transparent 50%);
+  color: var(--text-primary);
+  height: 100vh;
+  overflow: hidden;
 }
 
-/* 2. Layout Components */
-.app-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
+/* App Containers */
+.app-shell { display: flex; flex-direction: column; height: 100vh; }
+.layout-body { display: flex; flex: 1; overflow: hidden; }
+.main-content { flex: 1; overflow-y: auto; padding: 1.5rem; position: relative; }
 
-.main-layout {
-  display: flex;
-  flex: 1;
-}
-
-/* 3. Navbar Styling */
-.navbar {
-  position: sticky;
-  top: 0;
-  z-index: 100;
+/* Top Bar */
+.top-bar {
+  background: var(--glass-white);
+  backdrop-filter: blur(15px);
+  border-bottom: 1px solid var(--glass-border);
+  padding: 0.8rem 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.8rem 1.5rem;
-  background: var(--glass-bg);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border-bottom: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow);
+  z-index: 100;
 }
+.top-bar__logo-text { font-weight: 800; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.action-btn { background: #fff; border: 1px solid var(--glass-border); width: 40px; height: 40px; border-radius: 10px; cursor: pointer; transition: 0.3s; }
+.user-profile { width: 40px; height: 40px; border-radius: 10px; overflow: hidden; border: 2px solid white; }
+.user-profile__img { width: 100%; height: 100%; object-fit: cover; }
 
-.navbar__brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: 800;
-  font-size: 1.1rem;
-  background: var(--primary-grad);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
+/* Sidebar Rail */
+.side-nav { width: 260px; padding: 2rem 1.25rem; background: transparent; display: none; }
+.side-nav__link { display: flex; align-items: center; gap: 12px; padding: 14px 18px; color: var(--text-muted); text-decoration: none; border-radius: 12px; margin-bottom: 8px; font-weight: 600; transition: 0.3s; }
+.side-nav__link--active { background: #fff; color: #6366f1; box-shadow: var(--shadow); }
+.side-nav__divider { border: none; height: 1px; background: rgba(0,0,0,0.05); margin: 1rem 0; }
 
-.navbar__icon {
-  font-size: 1.6rem;
-  -webkit-text-fill-color: #6366f1;
-}
-
-.navbar__actions {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-/* 4. Sidebar Styling (Desktop Only) */
-.side-nav {
-  width: 260px;
-  padding: 2rem 1.2rem;
-  display: none; 
-}
-
-.side-nav__link {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 18px;
-  color: var(--text-muted);
-  text-decoration: none;
-  border-radius: 10px;
-  margin-bottom: 8px;
-  font-weight: 600;
-  transition: all 0.3s ease;
-}
-
-.side-nav__link--active {
-  background: #ffffff;
-  color: #6366f1;
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.1);
-}
-
-.side-nav__link:hover:not(.side-nav__link--active) {
-  background: rgba(255, 255, 255, 0.5);
-  transform: translateX(5px);
-}
-
-/* 5. Dashboard Grid - Locked Multi-Column */
-.dashboard-grid {
-  flex: 1;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 columns for mobile/tablet */
-  gap: 0.75rem;
-  padding: 1rem;
-}
-
-/* 6. Base Card Component */
-.widget-card {
-  background: var(--glass-bg);
+/* Bento Grid Logic */
+.bento-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+.bento-card {
+  background: var(--glass-white);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   border: 1px solid var(--glass-border);
-  border-radius: 10px;
-  padding: 1.25rem;
-  grid-column: span 1; /* Individual cards take half width */
+  border-radius: 10px; /* Locked Bento Radius */
+  padding: 1.5rem;
   position: relative;
   overflow: hidden;
-  box-shadow: var(--glass-shadow);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: var(--shadow);
   cursor: pointer;
-  display: flex;
-  flex-direction: column;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
+.bento-card:hover { transform: scale(1.02); }
+.bento-card--weather, .bento-card--footer { grid-column: span 2; }
 
-.widget-card:hover {
-  transform: scale(1.02);
-  box-shadow: 0 20px 40px rgba(31, 38, 135, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+/* Weather Card */
+.bento-card--weather {
+  background-image: url('https://images.unsplash.com/photo-1587474260584-1f397428c521?auto=format&fit=crop&w=1200');
+  background-size: cover; border: none; color: white; min-height: 220px;
 }
+.card-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.6), transparent); }
+.weather-meta { position: relative; z-index: 2; height: 100%; display: flex; justify-content: space-between; align-items: flex-end; }
+.temp-val { font-size: 4rem; font-weight: 800; line-height: 1; }
+.pill-badge { background: rgba(255,255,255,0.2); padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; backdrop-filter: blur(10px); }
 
-/* Force specific cards to span full width on all views */
-.widget-card--weather,
-.widget-card--analytics {
-  grid-column: span 2;
-}
+/* Hero Action Cards */
+.bento-card--action { min-height: 150px; display: flex; flex-direction: column; justify-content: flex-end; border: none; color: white; background-size: cover; }
+.bento-card--action::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.7)); }
+.card-label { position: relative; z-index: 2; font-weight: 700; }
 
-/* 7. Weather Card (New Delhi) */
-.widget-card--weather {
- background-image: url("https://images.unsplash.com/photo-1576519465852-4d119fcccf33?q=80&w=2103&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
-  background-size: cover;
-  background-position: center;
-  border: none;
-  color: white;
-  min-height: 200px;
-  justify-content: space-between;
-}
+.bento-card--tasks { background-image: url('https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=400'); }
+.bento-card--plans { background-image: url('https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=400'); }
+.bento-card--timer { background-image: url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=400'); }
+.bento-card--goals { background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=400'); }
 
-.weather-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.6) 0%, transparent 70%);
-  z-index: 1;
-}
+/* View Switching */
+.detail-pane { display: none; animation: slideIn 0.4s ease; height: 100%; flex-direction: column; padding: 1rem; }
+.detail-pane.is-active { display: flex; }
+.view-hub { display: none; }
+.view-hub.js-view-active { display: block; }
+.btn-back { background: var(--primary-gradient); color: white; border: none; padding: 12px 24px; border-radius: 12px; cursor: pointer; font-weight: 700; width: fit-content; margin-bottom: 2rem; }
 
-.weather-display {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  height: 100%;
-}
+@keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-.weather-display__time {
-  font-size: 2rem;
-  font-weight: 800;
-}
-
-.weather-display__temp-value {
-  font-size: 3.5rem;
-  font-weight: 800;
-  line-height: 1;
-}
-
-.weather-display__location {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(255, 255, 255, 0.2);
-  padding: 4px 12px;
-  border-radius: 50px;
-  backdrop-filter: blur(10px);
-  font-weight: 700;
-  font-size: 0.8rem;
-  margin-top: 5px;
-}
-
-/* 8. Hero Cards */
-.widget-card--hero {
-  justify-content: flex-end;
-  background-size: cover;
-  background-position: center;
-  border: none;
-  color: white;
-  min-height: 140px;
-}
-
-.widget-card--hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, transparent 30%, rgba(0, 0, 0, 0.7) 100%);
-}
-
-.hero-label {
-  position: relative;
-  z-index: 2;
-  font-size: 1.1rem;
-  font-weight: 700;
-}
-
-.widget-card--tasks { background-image: url("https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=500"); }
-.widget-card--plans { background-image: url("https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=500"); }
-.widget-card--timer { background-image: url("https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=500"); }
-.widget-card--goals { background-image: url("https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=500"); }
-
-/* 9. Analytics/Motivation */
-.widget-card--analytics { background: #ffffff; }
-.widget-card__title { font-size: 0.75rem; font-weight: 800; letter-spacing: 1px; color: var(--text-muted); text-transform: uppercase; }
-.centered-content { flex: 1; display: flex; align-items: center; justify-content: center; text-align: center; padding: 1.5rem; }
-.quote-text { font-size: 1.1rem; font-weight: 500; font-style: italic; color: #475569; line-height: 1.4; }
-
-/* 10. UI Elements */
-.button-icon {
-  width: 40px; height: 40px; background: white; border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer; border: 1px solid var(--glass-border);
-  transition: 0.2s;
-}
-
-.user-profile { width: 40px; height: 40px; border-radius: 10px; overflow: hidden; border: 2px solid white; }
-.user-profile__image { width: 100%; height: 100%; object-fit: cover; }
-
-/* 11. Responsive Logic (Tablet & Desktop) */
+/* Desktop Grid Adjustments */
 @media (min-width: 768px) {
-  .dashboard-grid {
-    grid-template-columns: repeat(4, 1fr); /* Expands to 4 columns */
-    gap: 1rem;
-  }
-
-  /* Weather & Analytics span all 4 columns */
-  .widget-card--weather,
-  .widget-card--analytics {
-    grid-column: span 4;
-  }
-
-  /* Weather card gets more height on bigger screens */
-  .widget-card--weather {
-    min-height: 240px;
-  }
-
-  .weather-display__time { font-size: 2.5rem; }
-  .weather-display__temp-value { font-size: 4.5rem; }
-
-  /* Hero cards stay in 1 column each, creating a 4-card row */
-  .widget-card--hero {
-    grid-column: span 1;
-    min-height: 180px;
-  }
-}
-
-@media (min-width: 1024px) {
+  .bento-grid { grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+  .bento-card--weather, .bento-card--footer { grid-column: span 4; }
+  .bento-card--action { grid-column: span 1; min-height: 180px; }
   .side-nav { display: block; }
 }
