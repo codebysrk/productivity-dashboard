@@ -350,6 +350,7 @@ document.addEventListener("DOMContentLoaded", () => {
           // Default to New Delhi coordinates
           fetchWeather(28.6139, 77.209);
         },
+        { enableHighAccuracy: true },
       );
     } else {
       // Fallback if Geolocation is not supported
@@ -358,4 +359,39 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   initWeather();
+
+  // ==========================================
+  // 7. Motivational Quotes
+  // ==========================================
+  // ==========================================
+  // 7. Motivational Quotes
+  // ==========================================
+
+  function fetchQuote() {
+    const url = "https://api.quotable.io/random?tags=inspirational|success";
+
+    fetch(url)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (data) {
+          document.querySelector(".quote-text").textContent =
+            `"${data.content}"`;
+          document.querySelector(".quote-author").textContent =
+            `- ${data.author}`;
+        }
+      })
+      .catch((err) => {
+        console.error("Quote fetch failed:", err);
+        document.querySelector(".quote-text").textContent =
+          `"The only way to do great work is to love what you do."`;
+        document.querySelector(".quote-author").textContent = `- Steve Jobs`;
+      });
+  }
+
+  fetchQuote();
 });

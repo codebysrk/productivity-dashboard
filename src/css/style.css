@@ -211,6 +211,15 @@ body {
   margin-bottom: auto;
 }
 
+.quote-author {
+  font-size: 0.9rem;
+  font-style: italic;
+  opacity: 0.8;
+  margin-top: 1rem;
+  text-align: right;
+  width: 100%;
+}
+
 .bento-card--weather:hover,
 .bento-card--footer:hover {
   transform: none;
